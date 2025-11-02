@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="main-content d-flex justify-content-center align-items-start py-5">
+  <div class="content-container w-100" style="max-width: 800px;">
+    <h2 class="mb-4 text-center">{{ title }}</h2>
+
+    <!-- 🧠 Ответ GigaChat -->
+    <hr class="my-4">
+    <h4 class="mb-3 text-center">Рекомендация от GigaChat</h4>
+    <div class="p-3 bg-light border rounded">
+      {{ giga_response }}
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ url_for('ege') }}" class="btn btn-secondary">Пройти заново</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="d-flex flex-column align-items-center justify-content-center vh-100 text-center">
+  <div class="content-container">
+    <h1>Профориентация к ОГЭ</h1>
+    <p class="lead mt-3">Давай начнем</p>
+    <a href="{{ url_for('test_selection_oge') }}" class="btn btn-primary btn-lg mt-4">Начать</a>
+  </div>
+</div>
+{% endblock %}

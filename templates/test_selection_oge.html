@@ -1,0 +1,98 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="main-content d-flex justify-content-center align-items-start py-5">
+  <div class="content-container w-100" style="max-width: 900px;">
+    <h2 class="mb-4 text-center">Тест для профориентации к ОГЭ</h2>
+
+    <form id="subjectForm" class="mx-auto" style="max-width: 700px;">
+      <!-- 1️⃣ Раздел: Предметы, которые нравятся -->
+      <div class="mb-5">
+        <h4 class="mb-3 text-success text-center">1. Предметы, которые тебе нравятся в школе</h4>
+        <div class="row">
+          {% set subjects = [
+            'Русский язык', 'Литература', 'Иностранный язык', 'История', 'Обществознание',
+            'География', 'Математика', 'Информатика', 'Физика', 'Биология', 'Химия',
+            'Изобразительное искусство', 'Музыка', 'Труд (технология)',
+            'Основы безопасности и защиты родины', 'Физическая культура', 'Астрономия'
+          ] %}
+          {% for subj in subjects %}
+          <div class="col-md-6 col-lg-4 mb-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="like_{{ loop.index }}" name="like" value="{{ subj }}">
+              <label class="form-check-label" for="like_{{ loop.index }}">{{ subj }}</label>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- 2️⃣ Раздел: Предметы, которые не нравятся -->
+      <div class="mb-5">
+        <h4 class="mb-3 text-danger text-center">2. Предметы, которые тебе не нравятся</h4>
+        <div class="row">
+          {% for subj in subjects %}
+          <div class="col-md-6 col-lg-4 mb-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="dislike_{{ loop.index }}" name="dislike" value="{{ subj }}">
+              <label class="form-check-label" for="dislike_{{ loop.index }}">{{ subj }}</label>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- 3️⃣ Раздел: Лёгкие предметы -->
+      <div class="mb-5">
+        <h4 class="mb-3 text-info text-center">3. Предметы, которые тебе кажутся лёгкими</h4>
+        <div class="row">
+          {% for subj in subjects %}
+          <div class="col-md-6 col-lg-4 mb-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="easy_{{ loop.index }}" name="easy" value="{{ subj }}">
+              <label class="form-check-label" for="easy_{{ loop.index }}">{{ subj }}</label>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- 4️⃣ Раздел: Сложные предметы -->
+      <div class="mb-5">
+        <h4 class="mb-3 text-warning text-center">4. Предметы, которые тебе кажутся сложными</h4>
+        <div class="row">
+          {% for subj in subjects %}
+          <div class="col-md-6 col-lg-4 mb-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="hard_{{ loop.index }}" name="hard" value="{{ subj }}">
+              <label class="form-check-label" for="hard_{{ loop.index }}">{{ subj }}</label>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="button" id="selectBtn" class="btn btn-success btn-lg mt-3 px-5">Завершить тест</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById('selectBtn').addEventListener('click', function () {
+  const params = new URLSearchParams();
+  const categories = ['like', 'dislike', 'easy', 'hard'];
+
+  categories.forEach(cat => {
+    document.querySelectorAll(`#subjectForm input[name="${cat}"]:checked`).forEach(cb => {
+      params.append(cat, cb.value);
+    });
+  });
+
+  window.location.href = `/answer_oge?${params.toString()}`;
+});
+</script>
+
+{% endblock %}
