@@ -17,14 +17,17 @@ app.config['CACHE_DEFAULT_TIMEOUT'] = 900  # 900 секунд = 15 минут
 cache = Cache(app)
 
 @app.route('/')
+@cache.cached(query_string=True)
 def index():
     return render_template('index.html', title='Главная страница')
 
 @app.route('/oge')
+@cache.cached(query_string=True)
 def oge():
     return render_template('oge.html', title='Профориентация к ОГЭ')
 
 @app.route('/test_selection_oge')
+@cache.cached(query_string=True)
 def test_selection_oge():
     return render_template('test_selection_oge.html')
 
@@ -45,8 +48,9 @@ def answer_oge():
     Строго запрещено использовать знаки Markdown, такие как *, #, ##, ###, **, ***, -
     Соблюдай знаки пунктуации и не нарушай грамматику русского языка.
     Меньше используй тире
+    Раздели ответ на абзацы!
 
-    Ответ должен включать три части:
+    Ответ должен включать части (Каждая часть должна быть в отдельном абзаце):
     
     1. Первое предложение должо быть таким: "Привет! Представлю твою профориентацию по выбранным интересам в школе"
     2. Подбор нескольких актуальных профессий на ближайшие годы, которые подойдут ученику по его интересам. 
@@ -83,10 +87,12 @@ def answer_oge():
     )
 
 @app.route('/ege')
+@cache.cached(query_string=True)
 def ege():
     return render_template('ege.html', title='Профориентация к ЕГЭ')
 
 @app.route('/test_selection_ege')
+@cache.cached(query_string=True)
 def test_selection_ege():
     return render_template('test_selection_ege.html')
 
@@ -109,8 +115,9 @@ def answer_ege():
 Составь короткий, логичный и понятный текст (до 13 предложений),
 без использования Markdown символов (#, *, **, -, ## и т.п.).
 Пиши грамотно, без лишних восклицаний, и избегай разговорных слов.
+Раздели ответ на абзацы! 
 
-Структура ответа:
+Ответ должен включать части:
 
 1. Начни с фразы: "Привет! Представлю твою профориентацию по выбранным интересам"
 2. Подбери несколько актуальных профессий ближайших лет, которые подойдут ученику, исходя из его интересов и ответов.  
@@ -153,6 +160,7 @@ def answer_ege():
     )
 
 @app.route('/about')
+@cache.cached(query_string=True)
 def about():
     return render_template('about.html', title='Об авторе')
 
