@@ -1,6 +1,12 @@
 {% extends "main.html" %}
 
 {% block content %}
+<!-- Лоадер (анимированное ожидание) -->
+<div id="loader" style="display:none;" class="loading-overlay">
+  <div class="spinner"></div>
+  <div>Пожалуйста, подождите, идет обработка...</div>
+</div>
+
 <div class="main-content d-flex justify-content-center align-items-start py-5">
   <div class="content-container w-100" style="max-width: 900px;">
     <h2 class="mb-4 text-center">Профориентационный тест для подготовки к ЕГЭ</h2>
@@ -151,7 +157,13 @@
 </div>
 
 <script>
+function showLoader() {
+  document.getElementById('loader').style.display = 'flex';
+}
+
 document.getElementById('selectBtn').addEventListener('click', function () {
+  showLoader(); // Показываем лоадер перед обработкой
+
   const params = new URLSearchParams();
 
   // Множественный выбор (чекбоксы)
@@ -171,8 +183,10 @@ document.getElementById('selectBtn').addEventListener('click', function () {
     }
   });
 
+  // Переход на страницу с результатом — лоадер будет виден до загрузки новой страницы
   window.location.href = `/answer_ege?${params.toString()}`;
 });
 </script>
+
 
 {% endblock %}

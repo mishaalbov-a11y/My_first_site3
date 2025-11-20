@@ -1,6 +1,11 @@
 {% extends "main.html" %}
 
 {% block content %}
+<!-- Лоадер (анимированное ожидание) -->
+<div id="loader" style="display:none;" class="loading-overlay">
+  <div class="spinner"></div>
+  <div>Пожалуйста, подождите, идет обработка...</div>
+</div>
 
 <div class="main-content d-flex justify-content-center align-items-start py-5">
   <div class="content-container w-100" style="max-width: 900px;">
@@ -81,7 +86,16 @@
 </div>
 
 <script>
+function showLoader() {
+  document.getElementById('loader').style.display = 'flex';
+}
+// function hideLoader() {
+//   document.getElementById('loader').style.display = 'none';
+// }
+
 document.getElementById('selectBtn').addEventListener('click', function () {
+  showLoader(); // Показываем лоадер перед началом обработки
+
   const params = new URLSearchParams();
   const categories = ['like', 'dislike', 'easy', 'hard'];
 
@@ -91,8 +105,10 @@ document.getElementById('selectBtn').addEventListener('click', function () {
     });
   });
 
+  // Перенаправление на другую страницу — лоадер останется поверх до полной загрузки нового адреса
   window.location.href = `/answer_oge?${params.toString()}`;
 });
 </script>
+
 
 {% endblock %}
