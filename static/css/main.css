@@ -26,4 +26,53 @@
     font-size: 1.2em;
     text-align: center;
 }
+.faq-section {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 36px 24px 30px 24px;
+}
+.faq-question {
+  width: 100%;
+  padding: 17px 24px;
+  background: #454a52;       /* насыщенный тёмно-серый фон */
+  color: #fff;               /* белый текст */
+  text-align: left;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  font-weight: 550;
+  font-size: 1.1em;
+  margin-bottom: 4px;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.faq-question:hover,
+.faq-item.active .faq-question {
+  background: #23262b;       /* немного темнее при наведении/раскрытии */
+  color: #ffe;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.4s;
+  background: #fff;            /* белый фон ответа */
+  color: #222;
+  padding: 0 24px;
+  border-radius: 0 0 6px 6px;
+  margin-bottom: 14px;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 260px;
+  opacity: 1;
+  padding-top: 16px;
+  padding-bottom: 10px;
+}
+
 

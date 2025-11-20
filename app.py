@@ -159,6 +159,11 @@ def answer_ege():
         giga_response=giga_response
     )
 
+@app.route('/FAQ')
+@cache.cached(query_string=True)
+def FAQ():
+    return render_template('FAQ.html', title='Популярные вопросы')
+
 @app.route('/about')
 @cache.cached(query_string=True)
 def about():
