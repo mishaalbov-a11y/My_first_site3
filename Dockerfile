@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir \
     requests
 
 COPY . .
+EXPOSE $PORT
+CMD gunicorn app:app --bind 0.0.0.0:$PORT
 
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:$PORT"]
 
