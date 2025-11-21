@@ -37,8 +37,8 @@
 .faq-question {
   width: 100%;
   padding: 17px 24px;
-  background: #454a52;       /* насыщенный тёмно-серый фон */
-  color: #fff;               /* белый текст */
+  background: #6c757d;        /* тот самый оттенок серого */
+  color: #fff;
   text-align: left;
   border: none;
   outline: none;
@@ -52,9 +52,10 @@
 }
 .faq-question:hover,
 .faq-item.active .faq-question {
-  background: #23262b;       /* немного темнее при наведении/раскрытии */
-  color: #ffe;
+  background: #5a6268;        /* чуть темнее при наведении и раскрытии — как в Bootstrap */
+  color: #fff;
 }
+
 
 .faq-answer {
   max-height: 0;
@@ -74,5 +75,8 @@
   padding-top: 16px;
   padding-bottom: 10px;
 }
-
+#selectBtn {
+  min-width: 210px;
+  min-height: 48px; /* или по размеру btn-lg */
+}
 

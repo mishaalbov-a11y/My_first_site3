@@ -1,12 +1,6 @@
 {% extends "main.html" %}
 
 {% block content %}
-<!-- Лоадер (анимированное ожидание) -->
-<div id="loader" style="display:none;" class="loading-overlay">
-  <div class="spinner"></div>
-  <div>Пожалуйста, подождите, идет обработка...</div>
-</div>
-
 <div class="main-content d-flex justify-content-center align-items-start py-5">
   <div class="content-container w-100" style="max-width: 900px;">
     <h2 class="mb-4 text-center">Тест для профориентации к ОГЭ</h2>
@@ -35,7 +29,7 @@
 
       <!-- 2️⃣ Раздел: Предметы, которые не нравятся -->
       <div class="mb-5">
-        <h4 class="mb-3 text-danger text-center">2. Предметы, которые тебе не нравятся</h4>
+        <h4 class="mb-3 text-success text-center">2. Предметы, которые тебе не нравятся</h4>
         <div class="row">
           {% for subj in subjects %}
           <div class="col-md-6 col-lg-4 mb-2">
@@ -50,7 +44,7 @@
 
       <!-- 3️⃣ Раздел: Лёгкие предметы -->
       <div class="mb-5">
-        <h4 class="mb-3 text-info text-center">3. Предметы, которые тебе кажутся лёгкими</h4>
+        <h4 class="mb-3 text-success text-center">3. Предметы, которые тебе кажутся лёгкими</h4>
         <div class="row">
           {% for subj in subjects %}
           <div class="col-md-6 col-lg-4 mb-2">
@@ -65,7 +59,7 @@
 
       <!-- 4️⃣ Раздел: Сложные предметы -->
       <div class="mb-5">
-        <h4 class="mb-3 text-warning text-center">4. Предметы, которые тебе кажутся сложными</h4>
+        <h4 class="mb-3 text-success text-center">4. Предметы, которые тебе кажутся сложными</h4>
         <div class="row">
           {% for subj in subjects %}
           <div class="col-md-6 col-lg-4 mb-2">
@@ -79,22 +73,21 @@
       </div>
 
       <div class="text-center">
-        <button type="button" id="selectBtn" class="btn btn-success btn-lg mt-3 px-5">Завершить тест</button>
+        <button type="button" id="selectBtn" class="btn btn-success btn-lg mt-3 px-5" style="min-width: 210px;">
+          <span class="btn-text">Завершить тест</span>
+          <span class="spinner-border spinner-border-sm text-light d-none" role="status" aria-hidden="true"></span>
+        </button>
       </div>
     </form>
   </div>
 </div>
 
 <script>
-function showLoader() {
-  document.getElementById('loader').style.display = 'flex';
-}
-// function hideLoader() {
-//   document.getElementById('loader').style.display = 'none';
-// }
-
 document.getElementById('selectBtn').addEventListener('click', function () {
-  showLoader(); // Показываем лоадер перед началом обработки
+  const btn = this;
+  btn.querySelector('.btn-text').classList.add('d-none');
+  btn.querySelector('.spinner-border').classList.remove('d-none');
+  btn.disabled = true;
 
   const params = new URLSearchParams();
   const categories = ['like', 'dislike', 'easy', 'hard'];
@@ -105,10 +98,10 @@ document.getElementById('selectBtn').addEventListener('click', function () {
     });
   });
 
-  // Перенаправление на другую страницу — лоадер останется поверх до полной загрузки нового адреса
   window.location.href = `/answer_oge?${params.toString()}`;
 });
 </script>
+
 
 
 {% endblock %}

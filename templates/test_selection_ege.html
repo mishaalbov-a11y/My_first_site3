@@ -1,12 +1,6 @@
 {% extends "main.html" %}
 
 {% block content %}
-<!-- Лоадер (анимированное ожидание) -->
-<div id="loader" style="display:none;" class="loading-overlay">
-  <div class="spinner"></div>
-  <div>Пожалуйста, подождите, идет обработка...</div>
-</div>
-
 <div class="main-content d-flex justify-content-center align-items-start py-5">
   <div class="content-container w-100" style="max-width: 900px;">
     <h2 class="mb-4 text-center">Профориентационный тест для подготовки к ЕГЭ</h2>
@@ -15,7 +9,7 @@
 
       <!-- 1️⃣ Раздел: Предметы, которые нравятся (МНОЖЕСТВЕННЫЙ ВЫБОР) -->
       <div class="mb-5">
-        <h4 class="mb-3 text-primary text-center">1. Какие предметы тебе нравятся в школе?</h4>
+        <h4 class="mb-3 text-success text-center">1. Какие предметы тебе нравятся в школе?</h4>
         <div class="row">
           {% set subjects = [
             'Русский язык', 'Литература', 'Иностранный язык', 'История', 'Обществознание',
@@ -36,7 +30,7 @@
 
       <!-- 🔹 Раздел 2: Карьерная траектория (ОДИНОЧНЫЙ ВЫБОР) -->
       <div class="mb-5">
-        <h4 class="mb-3 text-primary text-center">2. Какая карьерная траектория тебя больше привлекает?</h4>
+        <h4 class="mb-3 text-success text-center">2. Какая карьерная траектория тебя больше привлекает?</h4>
         <div class="form-check mb-2">
           <input class="form-check-input" type="radio" name="career_path" id="career1" value="руководитель">
           <label class="form-check-label" for="career1">Вырасти из специалиста в руководителя высокого уровня</label>
@@ -53,7 +47,7 @@
 
       <!-- 🔹 Раздел 3: Тип работы (ОДИНОЧНЫЙ ВЫБОР) -->
       <div class="mb-5">
-        <h4 class="mb-3 text-primary text-center">3. Представь, что в мире осталось два типа работы. Что ты выберешь?</h4>
+        <h4 class="mb-3 text-success text-center">3. Представь, что в мире осталось два типа работы. Что ты выберешь?</h4>
         <div class="form-check mb-2">
           <input class="form-check-input" type="radio" name="job_type" id="job1" value="стабильная">
           <label class="form-check-label" for="job1">Стабильная и востребованная, но с рутинными задачами</label>
@@ -66,7 +60,7 @@
 
       <!-- 🔹 Раздел 4: Способ получения информации (ОДИНОЧНЫЙ ВЫБОР) -->
       <div class="mb-5">
-        <h4 class="mb-3 text-primary text-center">4. Как чаще всего ты получаешь информацию?</h4>
+        <h4 class="mb-3 text-success text-center">4. Как чаще всего ты получаешь информацию?</h4>
         <div class="form-check mb-2">
           <input class="form-check-input" type="radio" name="learning_style" id="info1" value="чтение">
           <label class="form-check-label" for="info1">Читаю книги, статьи, треды</label>
@@ -83,7 +77,7 @@
 
       <!-- 🔹 Раздел 5: Ритм работы (ОДИНОЧНЫЙ ВЫБОР) -->
       <div class="mb-5">
-        <h4 class="mb-3 text-primary text-center">5. Какой ритм работы тебе ближе?</h4>
+        <h4 class="mb-3 text-success text-center">5. Какой ритм работы тебе ближе?</h4>
         <div class="form-check mb-2">
           <input class="form-check-input" type="radio" name="work_rhythm" id="rhythm1" value="одна_задача">
           <label class="form-check-label" for="rhythm1">Люблю полностью погружаться в одну задачу</label>
@@ -100,7 +94,7 @@
 
       <!-- 🔹 Раздел 6: Игры (МНОЖЕСТВЕННЫЙ ВЫБОР) -->
       <div class="mb-5">
-        <h4 class="mb-3 text-primary text-center">6. Какие некомпьютерные игры тебе нравятся?</h4>
+        <h4 class="mb-3 text-success text-center">6. Какие некомпьютерные игры тебе нравятся?</h4>
         <div class="row">
           {% set games = [
             'Спортивные командные (футбол, волейбол, баскетбол)',
@@ -125,7 +119,7 @@
 
       <!-- 🔹 Раздел 7: Детские предпочтения (МНОЖЕСТВЕННЫЙ ВЫБОР) -->
       <div class="mb-5">
-        <h4 class="mb-3 text-primary text-center">7. Что ты больше всего любил в детстве?</h4>
+        <h4 class="mb-3 text-success text-center">7. Что ты больше всего любил в детстве?</h4>
         <div class="row">
           {% set childhood = [
             'Рисовать или делать поделки',
@@ -150,40 +144,33 @@
 
       <!-- Кнопка отправки -->
       <div class="text-center">
-        <button type="button" id="selectBtn" class="btn btn-success btn-lg mt-3 px-5">Завершить тест</button>
+        <button type="button" id="selectBtn" class="btn btn-success btn-lg mt-3 px-5" style="min-width: 210px;">
+          <span class="btn-text">Завершить тест</span>
+          <span class="spinner-border spinner-border-sm text-light d-none" role="status" aria-hidden="true"></span>
+        </button>
       </div>
     </form>
   </div>
 </div>
 
 <script>
-function showLoader() {
-  document.getElementById('loader').style.display = 'flex';
-}
-
 document.getElementById('selectBtn').addEventListener('click', function () {
-  showLoader(); // Показываем лоадер перед обработкой
-
+  const btn = this;
+  btn.querySelector('.btn-text').classList.add('d-none');
+  btn.querySelector('.spinner-border').classList.remove('d-none');
+  btn.disabled = true;
+  // Не добавляй классы типа btn-outline или opacity — цвет останется как у btn-success!
+  // Сбор параметров и редирект не меняется:
   const params = new URLSearchParams();
-
-  // Множественный выбор (чекбоксы)
-  const multipleChoiceFields = ['like', 'games', 'childhood'];
-  multipleChoiceFields.forEach(field => {
+  ['like','games','childhood'].forEach(field => {
     document.querySelectorAll(`#subjectForm input[name="${field}"]:checked`).forEach(cb => {
       params.append(field, cb.value);
     });
   });
-
-  // Одиночный выбор (радиокнопки)
-  const singleChoiceFields = ['career_path', 'job_type', 'learning_style', 'work_rhythm'];
-  singleChoiceFields.forEach(field => {
+  ['career_path','job_type','learning_style','work_rhythm'].forEach(field => {
     const selected = document.querySelector(`#subjectForm input[name="${field}"]:checked`);
-    if (selected) {
-      params.append(field, selected.value);
-    }
+    if (selected) params.append(field, selected.value);
   });
-
-  // Переход на страницу с результатом — лоадер будет виден до загрузки новой страницы
   window.location.href = `/answer_ege?${params.toString()}`;
 });
 </script>
