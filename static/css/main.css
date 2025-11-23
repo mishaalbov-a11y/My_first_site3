@@ -6,10 +6,14 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   padding: 36px 24px 30px 24px;
 }
+.faq-item {
+  margin-bottom: 14px;
+  transition: margin 0.4s ease;
+}
 .faq-question {
   width: 100%;
   padding: 17px 24px;
-  background: #6c757d;        /* тот самый оттенок серого */
+  background: #6c757d;        /* оттенок серого */
   color: #fff;
   text-align: left;
   border: none;
@@ -22,30 +26,38 @@
   cursor: pointer;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
+
 .faq-question:hover,
 .faq-item.active .faq-question {
   background: #5a6268;        /* чуть темнее при наведении и раскрытии — как в Bootstrap */
   color: #fff;
 }
+
 .faq-answer {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.4s;
-  background: #fff;            /* белый фон ответа */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, padding-top 0.4s ease, padding-bottom 0.4s ease, margin-bottom 0.4s ease;
+  background: #fff;
   color: #222;
-  padding: 0 24px;
-  border-radius: 0 0 6px 6px;
-  margin-bottom: 14px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 6px;
+  margin-bottom: 0;
 }
+
 .faq-item.active .faq-answer {
-  max-height: 260px;
+  max-height: 300px;
   opacity: 1;
   padding-top: 16px;
   padding-bottom: 10px;
+  margin-bottom: 14px;
 }
 #selectBtn {
   min-width: 210px;
   min-height: 48px; /* или по размеру btn-lg */
 }
+
 
